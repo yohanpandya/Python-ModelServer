@@ -89,5 +89,7 @@ class PredictionCache:
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=4), options=(('grpc.so_reuseport', 0),))
 modelserver_pb2_grpc.add_ModelServerServicer_to_server(ModelServer(), server)
 server.add_insecure_port("[::]:5440", )
+print("server started at port 5440. Please open a new window and copy and paste the following line into the command line:\n python3 client.py 5440 \"1.0,2.0,3.0\" workload/workload1.csv workload/workload2.csv ")
+
 server.start()
 server.wait_for_termination()
